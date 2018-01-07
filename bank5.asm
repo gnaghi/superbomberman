@@ -469,7 +469,7 @@ power_zone_label_frame:.BYTE $24
 		frame_oam_tile 8, 5, $2505, 2
 		frame_oam_tile $10, 5,	$2505, 2
 		frame_oam_tile $18, 5,	$2505, 2
-wrap_zone_label_frame:.BYTE $21
+warp_zone_label_frame:.BYTE $21
 		frame_oam_tile $14, $FD, $2705, 2
 		frame_oam_tile $C, $FD, $3304,	2
 		frame_oam_tile 4, $FD,	$3204, 2
@@ -863,7 +863,7 @@ power_zone_label_frame:
         frame_oam_tile $F8, $FD, $604, 2
         frame_oam_tile $F0, $FD, $1404, 2
         frame_oam_tile $E8, $FD, $604, 2
-wrap_zone_label_frame:
+warp_zone_label_frame:
         .BYTE $1D
         frame_oam_tile $1B, $F7, $3305, 2
         frame_oam_tile $E8, $F6, $3505, 2
@@ -1191,8 +1191,8 @@ light_zone_label:	.BYTE 1
 		animation_frame light_zone_label_frame, $FF
 power_zone_label:	.BYTE 1
 		animation_frame power_zone_label_frame, $FF
-wrap_zone_label:	.BYTE 1
-		animation_frame wrap_zone_label_frame, $FF
+warp_zone_label:	.BYTE 1
+		animation_frame warp_zone_label_frame, $FF
 speed_zone_label:	.BYTE 1
 		animation_frame speed_zone_label_frame, $FF
 .IFDEF J
@@ -5369,7 +5369,7 @@ loc_C54F42:
 
 loc_C54F52:
 ; Sound test access
-.IFNDEF J
+.IF FIX_JOYPAD_5_BUG
 ; Bugfix: the Japanese version did not verify Joypad 5 is connected.
 		LDA	a:.LOWORD(joypad_5_connected) ; orig=0x0CEF
 		AND	#$1F
@@ -5928,7 +5928,7 @@ loc_C55284:
 		STA	z:$40
 		PLY
 		LDA	z:$40
-.IF USE_MULTI5_BIOS
+.IF JOYPAD_RELATED_BUGFIX
 		AND	#$1F
 		CMP	#1
 		BEQ	loc_C552D5
@@ -6082,7 +6082,7 @@ loc_C5539F:
 		STA	z:$40
 		PLY
 		LDA	z:$40
-.IF USE_MULTI5_BIOS
+.IF JOYPAD_RELATED_BUGFIX
 		AND	#$1F
 		CMP	#1
 		BEQ	loc_C55373
